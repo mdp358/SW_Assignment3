@@ -1,0 +1,95 @@
+package predictive;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.Set;
+
+public class PredictivePrototype {
+
+	private static Set<String> possibleWords;
+	
+	/*
+	 * takes a word and returns a numeric signature
+	 * If the word has any non-alpha letters replace them with a “ ” (space)
+	 */
+	public String wordToSignature(String word) { //String word
+				
+		String numbers;
+		StringBuilder sb = new StringBuilder();
+		char num;
+		for (int i = 0; i < word.length(); i++) {
+			char current = Character.toLowerCase(word.charAt(i));
+
+			if (current == 'a' || current == 'b' || current == 'c') {
+				num = '2';
+			} else if (current == 'd' || current == 'e' || current == 'f') {
+				num = '3';
+			} else if (current == 'g' || current == 'h' || current == 'i') {
+				num = '4';
+			} else if (current == 'j' || current == 'k' || current == 'l') {
+				num = '5';
+			} else if (current == 'm' || current == 'n' || current == 'o') {
+				num = '6';
+			} else if (current == 'p' || current == 'q' || current == 'r'
+					|| current == 's') {
+				num = '7';
+			} else if (current == 't' || current == 'u' || current == 'v') {
+				num = '8';
+			} else if (current == 'w' || current == 'x' || current == 'y'
+					|| current == 'z') {
+				num = '9';
+			} else
+				num = ' ';
+
+			sb.append(num);
+
+		}
+
+		numbers = sb.toString();
+
+		return numbers;
+	}
+
+	private static boolean isValidWord(String word) {
+		List<char> alpha = Arrays.asList('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z');
+		for(int i = 0; i < word.length(); i++){
+			if(!alpha.contains(word.charAt(i)))
+					return false;
+		}
+		return true;
+	}
+	
+	public static Set<String> signatureToWords(String signature) {
+			
+			File dictionary = new File("/usr/share/dict/words");
+			Scanner scanner;
+			try {
+				scanner = new Scanner(dictionary);
+				while(scanner.hasNextLine()){
+					//check for valid word
+					String word = scanner.nextLine();
+					System.out.println(word);
+				}
+				scanner.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		return possibleWords;
+	}
+
+	public static void main(String[] args){
+		
+		
+	
+	}
+	
+	
+}
+
+
